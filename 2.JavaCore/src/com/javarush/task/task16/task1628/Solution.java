@@ -25,29 +25,33 @@ public class Solution {
         consolReader3.start();
 
         while (count > countReadStrings.get()) {
+        }
+        reader.close();
         consolReader1.interrupt();
         consolReader2.interrupt();
         consolReader3.interrupt();
         System.out.println("#1:" + consolReader1);
         System.out.println("#2:" + consolReader2);
         System.out.println("#3:" + consolReader3);
-        }
-        reader.close();
+
     }
 
     public static class ReaderThread extends Thread {
         private List<String> result = new ArrayList<String>();
 
         public void run() {
-            //add your code here - добавьте код тут
+            while (!isInterrupted()){
                 try {
-                    if (isInterrupted()) {
-                        result.add(reader.readLine());
-                        countReadStrings.set(countReadStrings.get()+1);
+                    if (reader.ready()){
+                    result.add(reader.readLine());
+                    countReadStrings.incrementAndGet();
                     }
                 } catch (IOException e) {
-
+                    e.printStackTrace();
                 }
+
+            }
+            //add your code here - добавьте код тут
         }
 
         @Override
