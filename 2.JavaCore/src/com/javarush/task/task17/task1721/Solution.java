@@ -1,10 +1,13 @@
 package com.javarush.task.task17.task1721;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /* 
 Транзакционность
@@ -14,18 +17,28 @@ public class Solution {
     public static List<String> allLines = new ArrayList<String>();
     public static List<String> forRemoveLines = new ArrayList<String>();
 
-    public static void main(String[] args) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            String file1 = reader.readLine();
-            String file2 = reader.readLine();
+    public static void main(String[] args) throws IOException {
+        fillLists();
+        new Solution().joinData();
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private static void fillLists() throws IOException{
+        Scanner scanner = new Scanner(System.in);
+        String nameFile1 = scanner.nextLine();
+        String nameFile2 = scanner.nextLine();
+
+        allLines = Files.lines(Paths.get(nameFile1), StandardCharsets.UTF_8).collect(Collectors.toList());
+        forRemoveLines = Files.lines(Paths.get(nameFile2),StandardCharsets.UTF_8).collect(Collectors.toList());
     }
 
     public void joinData () throws CorruptedDataException {
-
+        for (String tmp:forRemoveLines) {
+            if (allLines.contains(tmp)){
+                allLines.remove(tmp);
+            } else {
+                allLines.clear();
+                throw new CorruptedDataException();
+            }
+        }
     }
 }
