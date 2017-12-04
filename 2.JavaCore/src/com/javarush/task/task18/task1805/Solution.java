@@ -26,5 +26,6 @@ public class Solution {
             System.out.print(treeSet.first()+ " ");
             treeSet.remove(treeSet.first());
         }
+
     }
 }
