@@ -8,8 +8,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-// /media/59A7E55F1637CB7E/SQL+GIT+JAVA/Example/data.txt
-// /media/59A7E55F1637CB7E/SQL+GIT+JAVA/Example/result.txt
+// /media/59A7E55F1637CB7E/SQL+GIT+JAVA/Example/data.txt  // входящий файл
+// /media/59A7E55F1637CB7E/SQL+GIT+JAVA/Example/result.txt // исходящий файл
 
 public class Solution {
     public static void main(String[] args) {
