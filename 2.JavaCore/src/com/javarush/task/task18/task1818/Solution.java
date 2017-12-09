@@ -8,19 +8,17 @@ import java.io.*;
 
 public class Solution {
     public static void main(String[] args) throws IOException{
-
+    wrapperSystemIn();
+    BufferedReader reader = new BufferedReader(
+            new InputStreamReader(
+                    System.in));
         FileOutputStream file1 = new FileOutputStream(
-                new BufferedReader(
-                    new InputStreamReader(
-                        System.in)).readLine());
+                reader.readLine());
+
         FileInputStream file2 = new FileInputStream(
-                new BufferedReader(
-                        new InputStreamReader(
-                                System.in)).readLine());
+                reader.readLine());
         FileInputStream file3 = new FileInputStream(
-                new BufferedReader(
-                        new InputStreamReader(
-                                System.in)).readLine());
+                reader.readLine());
         while (file2.available()>0){
             file1.write(file2.read());
         }
@@ -28,12 +26,13 @@ public class Solution {
         while ((oneByte = file3.read())!=-1){
             file1.write(oneByte);
         }
+        reader.close();
         file2.close();
         file3.close();
         file1.close();
     }
 
-    public static void whapperSystemIn (){
+    public static void wrapperSystemIn(){
         StringBuilder builder = new StringBuilder();
         builder
                 .append("/media/59A7E55F1637CB7E/SQL+GIT+JAVA/Example/data.txt")
