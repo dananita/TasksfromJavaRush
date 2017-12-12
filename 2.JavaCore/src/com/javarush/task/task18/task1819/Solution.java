@@ -8,6 +8,7 @@ import java.io.*;
 
 
 //  /media/59A7E55F1637CB7E/SQL+GIT+JAVA/Example/1
+
 public class Solution {
     public static void main(String[] args) throws IOException{
 
