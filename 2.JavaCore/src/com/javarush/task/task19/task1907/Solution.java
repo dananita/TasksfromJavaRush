@@ -1,25 +1,29 @@
 package com.javarush.task.task19.task1907;
 
 /* 
-Считаем слово
+Считаем слово world!
 */
 
 import java.io.*;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String file1 = reader.readLine();
-        String file2 = reader.readLine();
-        reader.close();
-        FileReader fileReader = new FileReader(file1);
-        FileWriter fileWriter = new FileWriter(file2);
-        int tempstr=0;
-        while (fileReader.ready()){
-            tempstr = fileReader.read();
-            if (tempstr!=44&&tempstr!=46) fileWriter.write(tempstr);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        String fileName1 = bufferedReader.readLine();
+        bufferedReader.close();
+
+        BufferedReader fileReader = new BufferedReader(new FileReader(fileName1));
+        int count = 0;
+        String word = "world";
+        while (fileReader.ready()) {
+            String line = fileReader.readLine();
+            String[] words = line.toString().split("\\W");
+            for (String s : words)
+                if (s.equals(word))
+                    count++;
         }
         fileReader.close();
-        fileWriter.close();
+
+        System.out.println(count);
     }
 }
