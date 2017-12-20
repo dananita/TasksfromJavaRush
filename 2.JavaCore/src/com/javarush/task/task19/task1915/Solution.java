@@ -25,9 +25,9 @@ public class Solution {
 
         StringBuilder stringBuilder = new StringBuilder(result);
         System.out.println(stringBuilder);
-        FileWriter fileWriter = new FileWriter(fileName);
-        fileWriter.write(stringBuilder.toString());
-        fileWriter.close();
+        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+        fileOutputStream.write(result.getBytes());
+        fileOutputStream.close();
     }
 
     public static class TestString {
