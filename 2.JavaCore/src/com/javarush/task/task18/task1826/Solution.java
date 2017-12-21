@@ -23,38 +23,28 @@ public class Solution {
         fileOutputStream = new FileOutputStream(args[2]);
 
         int tempOneBytes;
-        while ((tempOneBytes = fileReader.read()) != -1) {
-            stringBuilder.append((char)tempOneBytes);
-        }
-        fileReader.close();
+        int buf = 0;
+        int i = 0;
 
         switch (args[0]) {
-            case "-e":
-                encrypt(stringBuilder);
+            case "-e": {
+                while ((tempOneBytes = fileReader.read()) != -1) {
+                    buf = tempOneBytes ^ KEY.charAt(i);
+                    fileOutputStream.write(buf);
+                    i = (i == KEY.length() - 1) ? 0 : i + 1;
+                    break;
+                }
+            }
+            case "-d": {
+                while ((tempOneBytes = fileReader.read()) != -1) {
+                    buf = tempOneBytes ^ KEY.charAt(i);
+                    fileOutputStream.write(buf);
+                    i = (i == KEY.length() - 1) ? 0 : i + 1;
+                }
                 break;
-            case "-d":
-                decipher(stringBuilder);
-                break;
+            }
         }
+        fileReader.close();
         fileOutputStream.close();
-    }
-
-    public static void encrypt(StringBuilder stringBuilder) throws IOException {
-
-        for (int i = 0; i < stringBuilder.length()-1; i++) {
-            int countKey = ((stringBuilder.charAt(i) + KEY.charAt(i % KEY.length()) - 2 * smesh) % 26);
-            char c = (char) (countKey + smesh);
-            fileOutputStream.write((int) c);
-        }
-
-    }
-    public static void decipher(StringBuilder stringBuilder) throws IOException {
-
-        for (int i = 0; i < stringBuilder.length()-1; i++) {
-            int countKey = ((stringBuilder.charAt(i) - KEY.charAt(i % KEY.length()) + 26) % 26);
-            //обратные преобразования с номером буквы в алфавите
-            char c = (char) (countKey + smesh);
-            fileOutputStream.write((int)c);
-        }
     }
 }
