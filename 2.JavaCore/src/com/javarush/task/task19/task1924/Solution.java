@@ -27,7 +27,7 @@ public class Solution {
          map.put(8,"восемь");
          map.put(9,"девять");
          map.put(10,"десять");
-         map.put(11,"одиннацать");
+         map.put(11,"одиннадцать");
          map.put(12,"двенадцать");
      }
 
