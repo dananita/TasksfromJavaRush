@@ -59,6 +59,7 @@ public class Hippodrome {
           horses.add(horse3);
           
           game = new Hippodrome(horses);
+          game.run();
     }
 
 }
