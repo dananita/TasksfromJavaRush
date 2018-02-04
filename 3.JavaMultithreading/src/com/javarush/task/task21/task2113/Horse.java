@@ -41,4 +41,10 @@ public class Horse {
     }
 
     private double distance;
+
+    public void move() {
+    }
+
+    public void print() {
+    }
 }
