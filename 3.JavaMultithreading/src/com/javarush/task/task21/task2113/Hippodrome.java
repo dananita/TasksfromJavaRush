@@ -10,6 +10,7 @@ import java.util.List;
  **/
 public class Hippodrome {
     private List<Horse> horses;
+    public static Hippodrome game;
 
     public Hippodrome(List<Horse> horses) {
         this.horses = horses;
@@ -20,7 +21,16 @@ public class Hippodrome {
     }
 
     public static void main(String[] args) {
-        
+          Horse horse1 = new Horse("Kassandra",3,0);
+          Horse horse2 = new Horse("Ivan",3,0);
+          Horse horse3 = new Horse("Muskul",3,0);
+
+          List<Horse> horses = new ArrayList();
+          horses.add(horse1);
+          horses.add(horse2);
+          horses.add(horse3);
+
+          game = new Hippodrome(horses);
     }
 
 }
