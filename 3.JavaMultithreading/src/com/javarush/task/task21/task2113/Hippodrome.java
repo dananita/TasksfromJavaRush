@@ -21,7 +21,15 @@ public class Hippodrome {
     }
 
     public void run(){
-
+        try {
+        for (int i = 0; i <100 ; i++) {
+            move();
+            print();
+            Thread.sleep(200);
+        }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void print(){
