@@ -47,5 +47,10 @@ public class Horse {
     }
 
     public void print() {
+        String distanceHorse = "";
+        for (int i = 0; i < Math.floor(distance) ; i++) {
+            distanceHorse +=".";
+        }
+        System.out.println(distanceHorse+name);
     }
 }
