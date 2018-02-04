@@ -22,7 +22,7 @@ public class Hippodrome {
 
     public void run(){
         try {
-        for (int i = 0; i <100 ; i++) {
+        for (int i = 0; i <10 ; i++) {
             move();
             print();
             Thread.sleep(200);
@@ -48,6 +48,22 @@ public class Hippodrome {
 
     }
 
+    public Horse getWinner(){
+        double dis1 = 0;
+        Horse winnerHorse=null;
+        for (Horse horse: horses) {
+            if(dis1 < horse.getDistance()){
+                dis1=horse.getDistance();
+                winnerHorse=horse;
+            }
+        }
+        return winnerHorse;
+    }
+
+    public void printWinner(){
+        System.out.println("Winner is "+getWinner().getName()+"!");
+    }
+
     public static void main(String[] args) {
           Horse horse1 = new Horse("Kassandra",3,0);
           Horse horse2 = new Horse("Ivan",3,0);
@@ -60,6 +76,7 @@ public class Hippodrome {
           
           game = new Hippodrome(horses);
           game.run();
+          game.printWinner();
     }
 
 }
