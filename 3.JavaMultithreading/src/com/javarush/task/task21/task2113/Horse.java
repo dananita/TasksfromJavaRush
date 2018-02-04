@@ -43,6 +43,7 @@ public class Horse {
     private double distance;
 
     public void move() {
+        distance+=speed*Math.random();
     }
 
     public void print() {
