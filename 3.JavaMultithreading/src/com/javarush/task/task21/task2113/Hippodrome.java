@@ -20,6 +20,18 @@ public class Hippodrome {
         return horses;
     }
 
+    public void run(){
+
+    }
+
+    public void print(){
+
+    }
+
+    public void move(){
+
+    }
+
     public static void main(String[] args) {
           Horse horse1 = new Horse("Kassandra",3,0);
           Horse horse2 = new Horse("Ivan",3,0);
@@ -29,7 +41,7 @@ public class Hippodrome {
           horses.add(horse1);
           horses.add(horse2);
           horses.add(horse3);
-
+          
           game = new Hippodrome(horses);
     }
 
