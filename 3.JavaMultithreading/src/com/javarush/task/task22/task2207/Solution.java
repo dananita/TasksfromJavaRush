@@ -3,10 +3,7 @@ package com.javarush.task.task22.task2207;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /* 
 Обращенные слова
@@ -23,20 +20,31 @@ public class Solution {
             Scanner inFile = new Scanner(new File(reader.readLine())).useDelimiter("\\s");
 
             List <String> listFileReader = new ArrayList<>();
+            //HashMap <String,Boolean> mapFileReader = new HashMap<>();
              while (inFile.hasNext()){
                 String text = inFile.next();
                 listFileReader.add(text);
+             //    mapFileReader.put(text,true);
              }
             String [] arrayWordsFromFile = new String[listFileReader.size()];
+            Boolean [] arrayWordsBoolean = new Boolean[listFileReader.size()];
+            for (int i = 0; i <arrayWordsBoolean.length ; i++) {
+                arrayWordsBoolean[i] = true;
+            }
              listFileReader.toArray(arrayWordsFromFile);
 
             for (int i = 0; i <arrayWordsFromFile.length ; i++) {
                 for (int j = arrayWordsFromFile.length-1; j > i ; j--) {
                     if (arrayWordsFromFile[i].equals(new StringBuilder(arrayWordsFromFile[j]).reverse().toString())){
-                        Pair pair = new Pair();
-                        pair.first = arrayWordsFromFile[i];
-                        pair.second = new StringBuilder(arrayWordsFromFile[j]).reverse().toString();
-                        result.add(pair);
+                        if (arrayWordsBoolean[i]==true && arrayWordsBoolean[j]==true) {
+                            Pair pair = new Pair();
+                            pair.first = arrayWordsFromFile[i];
+                            //pair.second = new StringBuilder(arrayWordsFromFile[j]).reverse().toString();
+                            pair.second = arrayWordsFromFile[j];
+                            result.add(pair);
+                            arrayWordsBoolean[i]=false;
+                            arrayWordsBoolean[j]=false;
+                        }
                     }
                 }
             }
