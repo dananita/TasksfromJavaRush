@@ -8,4 +8,8 @@ package com.javarush.task.task23.task2312;
 
 //класс (enum) будет описывать направление движения змеи
 public enum  SnakeDirection {
+        UP,
+        RIGHT,
+        DOWN,
+        LEFT
 }
