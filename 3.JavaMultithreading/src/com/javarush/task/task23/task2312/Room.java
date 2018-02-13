@@ -1,11 +1,14 @@
 package com.javarush.task.task23.task2312;
 
+import java.util.Random;
+
 /**
  * @author Daria Zhuravel
  * @author (zlakdanata@yandex.ru)
  * @date 13.02.18
  **/
 public class Room {
+    public static Room game;
     private int width;
     private int height;
     private Snake snake;
@@ -49,7 +52,18 @@ public class Room {
         this.mouse = mouse;
     }
 
-    public static void main(String[] args) {
+    public void run(){
 
+    }
+
+    public void print(){
+
+    }
+
+
+    public static void main(String[] args) {
+        Snake snake = new Snake(10,20);
+        game = new Room(140, 270, snake);
+        game.snake.setDirection(SnakeDirection.DOWN);
     }
 }
