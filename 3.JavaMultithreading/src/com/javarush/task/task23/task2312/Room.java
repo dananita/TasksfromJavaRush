@@ -53,7 +53,16 @@ public class Room {
     }
 
     public void run(){
+        sleep();
+    }
 
+    public void sleep(){
+    int s = snake.getSections().size();
+        try {
+            Thread.sleep(1000/(s*200));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void print(){
@@ -73,5 +82,7 @@ public class Room {
         Snake snake = new Snake(10,10);
         game = new Room(140, 270, snake);
         game.snake.setDirection(SnakeDirection.DOWN);
+        game.createMouse();
+        game.run();
     }
 }
