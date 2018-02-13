@@ -6,4 +6,6 @@ package com.javarush.task.task23.task2312;
  * @date 13.02.18
  **/
 public class Mouse {
+    private int x;
+    private int y;
 }
