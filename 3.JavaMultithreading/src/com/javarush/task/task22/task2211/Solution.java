@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 
 /* 
@@ -18,11 +19,11 @@ public class Solution {
         try (FileInputStream fileInputStream = new FileInputStream(args[0]);
              FileOutputStream fileOutputStream = new FileOutputStream(args[1])) {
             while (fileInputStream.available() > 0) {
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[(int) fileInputStream.getChannel().size()];
                 fileInputStream.read(buffer);
-                String s = new String(buffer, "UTF-8");
-                buffer = s.getBytes("UTF-8");
-                fileOutputStream.write(buffer);
+                String s = new String(buffer, Charset.forName("Windows-1251"));
+                //buffer = s.getBytes("utf8");
+                fileOutputStream.write(s.getBytes(Charset.forName("utf-8")));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
