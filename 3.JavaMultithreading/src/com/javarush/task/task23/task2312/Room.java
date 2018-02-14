@@ -96,9 +96,28 @@ public class Room {
      */
     public void print() {
         //Создаем массив, куда будем "рисовать" текущее состояние игры
-        //Рисуем все кусочки змеи
+        char [][] arrayGame = new char[height][width];
+        for (int i = 0; i < height ; i++) {
+            for (int j = 0; j < width; j++) {
+                arrayGame[i][j] = '.';
+            }
+        }
         //Рисуем мышь
+        arrayGame[mouse.getY()][mouse.getX()] = '^';
+        arrayGame[snake.getSections().get(0).getY()][snake.getSections().get(0).getX()] = 'X';
+
+        //Рисуем все кусочки змеи
+        for (int k = 1; k < snake.getSections().size(); k++) {
+                arrayGame[snake.getSections().get(k).getY()][snake.getSections().get(k).getX()] = 'x';
+        }
+
         //Выводим все это на экран
+        for (int i = 0; i < height ; i++) {
+            for (int j = 0; j < width ; j++) {
+                System.out.print(arrayGame[i][j]);
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -133,10 +152,8 @@ public class Room {
      * Программа делает паузу, длинна которой зависит от длинны змеи.
      */
     public void sleep() {
-        int time;
         try {
-            if ((time = snake.getSections().size()) < 11) {
-
+            if (snake.getSections().size() < 11) {
                 Thread.sleep(500);
             } else if (snake.getSections().size() >= 15) {
                 Thread.sleep(200);
