@@ -27,6 +27,18 @@ public class Snake {
         return sections.get(0).getY();
     }
 
+    public void checkBorders(SnakeSection head) {
+        isAlive = (head.getX() >= Room.game.getWidth() || head.getX() < 0
+                || head.getY() >= Room.game.getHeight() || head.getY() < 0
+                        ? false : true);
+    }
+
+    public void checkBody(SnakeSection head) {
+        if (getSections().contains(head)) {
+            isAlive = false;
+        }
+    }
+
     public void move(){
         if (isAlive){
             if (direction == SnakeDirection.UP) {
