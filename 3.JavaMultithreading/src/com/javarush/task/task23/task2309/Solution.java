@@ -28,7 +28,7 @@ public class Solution {
 
             @Override
             public String getQuery() {
-                return null;
+                return "SELECT * FROM USER";
             }
         }.execute();
     }
@@ -37,7 +37,7 @@ public class Solution {
         return new AbstractDbSelectExecutor<Location>(){
             @Override
             public String getQuery() {
-                return null;
+                return "SELECT * FROM LOCATION";
             }
         }.execute();
     }
@@ -46,7 +46,7 @@ public class Solution {
 
             @Override
             public String getQuery() {
-                return null;
+                return "SELECT * FROM SERVER";
             }
         }.execute();
     }
@@ -54,7 +54,7 @@ public class Solution {
         return new AbstractDbSelectExecutor<Subject>(){
             @Override
             public String getQuery() {
-                return null;
+                return "SELECT * FROM SUBJECT";
             }
         }.execute();
     }
@@ -63,7 +63,7 @@ public class Solution {
 
             @Override
             public String getQuery() {
-                return null;
+                return "SELECT * FROM SUBCRIPTION";
             }
         }.execute();
     }
