@@ -5,10 +5,18 @@ package com.javarush.task.task24.task2413;
  * @author (zlakdanata@yandex.ru)
  * @date 18.02.18
  **/
-public class BaseObject {
+public abstract class BaseObject {
     private double x;
     private double y;
     private double radius;
+
+    public abstract void draw(Canvas canvas);
+
+    public abstract void  move();
+
+    public boolean isIntersec(BaseObject o){
+        return Math.sqrt(Math.pow(this.getX()-o.getX(),2)+Math.pow(this.getY()-o.getY(),2))<=Math.max(this.getRadius(),o.getRadius()) ? true:false;
+    }
 
     public BaseObject(double x, double y, double radius) {
         this.x = x;
