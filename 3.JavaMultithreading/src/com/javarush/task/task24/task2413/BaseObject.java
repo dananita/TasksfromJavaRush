@@ -6,9 +6,9 @@ package com.javarush.task.task24.task2413;
  * @date 18.02.18
  **/
 public abstract class BaseObject {
-    private double x;
-    private double y;
-    private double radius;
+    protected double x;
+    protected double y;
+    protected double radius;
 
     public abstract void draw(Canvas canvas);
 
