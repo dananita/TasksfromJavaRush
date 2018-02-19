@@ -15,12 +15,34 @@ public class Arkanoid {
     private Stand stand;
     private List<Brick> bricks;
 
+    private boolean isGameOver;
+
     static Arkanoid game;
 
     public void run(){
 
     }
 
+    public void checkBricksBump(){
+        for (int i = bricks.size() - 1; i >= 0; i--) {
+            if (ball.isIntersec(bricks.get(i))) {
+                double angle = Math.random() * 360;
+                ball.setDirection(angle);
+                bricks.remove(i);
+                break;
+            }
+        }
+    }
+    public void checkStandBump(){
+        if(!stand.isIntersec(ball)){
+            double angle = 90 + 20* (Math.random()-0.5);
+            ball.setDirection(angle);
+        }
+    }
+    public void checkEndGame(){
+       if (ball.getY() > height)
+           isGameOver = true;
+    }
     public void move(){
         ball.move();
         stand.move();
