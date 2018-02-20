@@ -21,17 +21,32 @@ public class Solution implements Action {
 
                     @Override
                     public Action getDependantAction() {
+                        // выводит цифры от 5 до 1
                         while (param > 0) {
                             System.out.println(param--);
                         }
+
+                        // выводит class FirstClass, method someAction
                         super.someAction();
                         return null;
                     }
 
                 }.getDependantAction();
+
+                /* выводит сделующий блок:
+                * class SecondClass, method someAction
+                * Specific action for anonymous SecondClass, param = 0
+                * Count of created Action objects is 2
+                */
                 new SecondClass().someAction();
                 System.out.println(SecondClass.SPECIFIC_ACTION_FOR_ANONYMOUS_SECOND_CLASS_PARAM.replaceAll("\n", "") + param);
+
             } else {
+                /* выводит сделующий блок:
+                 * class SecondClass, method someAction
+                 * Specific action for anonymous SecondClass, param = -1
+                 * Count of created Action objects is 3
+                 */
                 new SecondClass().someAction();
                 System.out.println(SecondClass.SPECIFIC_ACTION_FOR_ANONYMOUS_SECOND_CLASS_PARAM.replaceAll("\n", "") + param);
             }
