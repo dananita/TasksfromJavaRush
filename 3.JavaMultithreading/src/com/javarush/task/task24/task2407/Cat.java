@@ -40,7 +40,7 @@ public class Cat implements Pet {
                     for (int j = 0; j < i ; j++) {
                         countCharI+='я';
                     }
-                    result = name + " м"+ countCharI+"у!";
+                    result = name + " говорит м"+ countCharI+"у!";
                 }
                 return result;
             }
