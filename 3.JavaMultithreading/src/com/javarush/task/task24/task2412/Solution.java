@@ -44,19 +44,34 @@ public class Solution {
 
         Collections.sort(list, new Comparator<Stock>() {
             public int compare(Stock stock1, Stock stock2) {
-                int result;
-                String name1 = ((String)stock1.get("name"));
-                String name2 = ((String)stock2.get("name"));
-                result = name1.compareTo(name2);
-                if (result == 0){
-                    result = ((Date)stock1.get("date")).compareTo(((Date)stock1.get("date")));
-                    if (result == 0){
-                        double s1 = ((double)stock1.get("last")-(double)stock1.get("open"));
-                        double s2 = ((double)stock2.get("last")-(double)stock2.get("open"));
-                        result = (s1 > s2) ? 1:((s1 < s2) ? -1 : 0);
+                String name1 = ((String) stock1.get("name"));
+                String name2 = ((String) stock2.get("name"));
+                int compareResult = name1.compareTo(name2);
+                if (compareResult != 0) {
+                    return compareResult;
+                } else {
+                    Date date1 = (Date) stock1.get("date");
+                    Date date2 = (Date) stock2.get("date");
+                    SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+                    int dCompResult = df.format(date1).compareTo(df.format(date2));
+                    if (dCompResult != 0) {
+                        return (-dCompResult);
+                    } else {
+                        double profit1;
+                        double profit2;
+                        if (stock1.containsKey("open")) {
+                            profit1 = ((double) stock1.get("last")) - ((double) stock1.get("open"));
+                        } else {
+                            profit1 = ((double) stock1.get("change"));
+                        }
+                        if (stock2.containsKey("open")) {
+                            profit2 = ((double) stock2.get("last")) - ((double) stock2.get("open"));
+                        } else {
+                            profit2 = ((double) stock2.get("change"));
+                        }
+                        return (-Double.compare(profit1, profit2));
                     }
                 }
-                return result;
             }
         });
     }
