@@ -15,7 +15,7 @@ public class EditUserView implements View{
     @Override
     public void refresh(ModelData modelData) {
         System.out.println("User to be edited:");
-            System.out.println("\t"+modelData.getActiveUser().toString());
+            System.out.println("\t" + modelData.getActiveUser());
         System.out.println("===================================================");
     }
 
@@ -25,12 +25,4 @@ public class EditUserView implements View{
         this.controller = controller;
     }
 
-    public void fireEventShowAllUsers(){
-        controller.onShowAllUsers();
-
-    }
-
-    public void fireEventShowDeletedUsers() {
-        controller.onShowAllDeletedUsers();
-    }
 }
