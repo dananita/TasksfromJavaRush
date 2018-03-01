@@ -13,8 +13,6 @@ public class Human {
 
     protected int[] size;
 
-    protected boolean isSoldier;
-
     public static final int FIRST = 1;
     public static final int SECOND = 2;
     public static final int THIRD = 3;
@@ -25,7 +23,6 @@ public class Human {
 
     public List<Human> getChildren() { return Collections.unmodifiableList(children); }
 
-    //public void setChildren(List<Human> children) {this.children = children;}
     public void addChild(Human human){ children.add(human); }
 
     public void removeChild(Human human){ children.remove(human); }
@@ -38,8 +35,9 @@ public class Human {
         return bloodGroup;
     }
 
-    public Human(boolean isSoldier) {
-        this.isSoldier = isSoldier;
+    public Human(String name, int age) {
+        this.name = name;
+        this.age = age;
         this.id = nextId;
         nextId++;
     }
@@ -62,14 +60,6 @@ public class Human {
 
     public int getCourse() {
         return course;
-    }
-
-    public void live() {
-        if (isSoldier)
-            fight();
-    }
-
-    public void fight() {
     }
 
     public int getId() {
