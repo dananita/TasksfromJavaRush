@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Human implements Alive {
-    public static int nextId = 0;
+    private static int nextId = 0;
     private int id;
     protected int age;
     protected String name;
@@ -16,9 +16,17 @@ public class Human implements Alive {
     public static final int SECOND = 2;
     public static final int THIRD = 3;
     public static final int FOURTH = 4;
-    private int bloodGroup;
 
     private List<Human> children = new ArrayList<>();
+    private int bloodGroup;
+
+
+    public Human(String name, int age) {
+        this.name = name;
+        this.age = age;
+        this.id = nextId;
+        nextId++;
+    }
 
     public List<Human> getChildren() { return Collections.unmodifiableList(children); }
 
@@ -30,13 +38,6 @@ public class Human implements Alive {
 
     public int getBloodGroup() {
         return bloodGroup;
-    }
-
-    public Human(String name, int age) {
-        this.name = name;
-        this.age = age;
-        this.id = nextId;
-        nextId++;
     }
 
     public int getAge() {
@@ -53,14 +54,6 @@ public class Human implements Alive {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void printSize() {
