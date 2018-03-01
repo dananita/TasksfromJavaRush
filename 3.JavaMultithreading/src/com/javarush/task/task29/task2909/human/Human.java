@@ -26,9 +26,7 @@ public class Human implements Alive {
 
     public void removeChild(Human human){ children.remove(human); }
 
-    public void setBloodGroup(int code) {
-        bloodGroup = code;
-    }
+    public void setBloodGroup(int code) { bloodGroup = code; }
 
     public int getBloodGroup() {
         return bloodGroup;
@@ -71,5 +69,13 @@ public class Human implements Alive {
 
     @Override
     public void live() {
+    }
+
+    public String getPosition(){
+        return "Человек";
+    }
+
+    public void printData() {
+        System.out.println(getPosition()+": "+name);
     }
 }

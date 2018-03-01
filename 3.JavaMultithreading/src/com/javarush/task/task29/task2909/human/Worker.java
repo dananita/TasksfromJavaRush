@@ -1,23 +1,23 @@
 package com.javarush.task.task29.task2909.human;
 
-public class Worker implements Alive{
-    private Soldier soldier;
+public class Worker extends Human implements Alive{
+    //private Soldier soldier;
     private double salary;
     public String company;
 
     public Worker(String name, int age) {
-        soldier = new Soldier(name,age);
+        super(name,age);
     }
 
     public void live() {
-        soldier.live();
+        this.live();
     }
 
     public double getSalary() {
         return salary;
     }
 
-    public void setSlr(double salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 }
