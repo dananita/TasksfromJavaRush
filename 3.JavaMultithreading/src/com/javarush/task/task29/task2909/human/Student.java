@@ -1,14 +1,13 @@
 package com.javarush.task.task29.task2909.human;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class Student extends Human {
+public class Student extends Human implements Alive {
     private double averageGrade;
     private String university;
     private Date beginningOfSession;
     private Date endOfSession;
+    private int course;
 
     public Student(String name, int age, double averageGrade) {
         super(name, age);
@@ -63,5 +62,9 @@ public class Student extends Human {
 
     public double getAverageGrade() {
         return averageGrade;
+    }
+
+    public int getCourse() {
+        return course;
     }
 }

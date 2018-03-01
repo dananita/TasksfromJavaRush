@@ -5,7 +5,7 @@ package com.javarush.task.task29.task2909.human;
  * @author (zlakdanata@yandex.ru)
  * @date 02.03.18
  **/
-public class Soldier extends Human{
+public class Soldier extends Human implements Alive{
 
     public void live() {
             fight();

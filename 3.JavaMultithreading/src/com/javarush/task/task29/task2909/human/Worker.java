@@ -1,6 +1,6 @@
 package com.javarush.task.task29.task2909.human;
 
-public class Worker {
+public class Worker implements Alive{
     private Soldier soldier;
     private double salary;
     public String company;
