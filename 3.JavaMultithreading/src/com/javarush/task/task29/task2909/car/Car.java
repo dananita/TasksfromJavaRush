@@ -22,11 +22,10 @@ public class Car {
         this.numberOfPassengers = numberOfPassengers;
     }
 
-    public int fill(double numberOfLiters) throws RuntimeException {
+    public void fill(double numberOfLiters){
         if (numberOfLiters < 0)
             throw new RuntimeException();
         fuel += numberOfLiters;
-        return 0;
     }
 
     public double getTripConsumption(Date date, int length, Date SummerStart, Date SummerEnd) {
