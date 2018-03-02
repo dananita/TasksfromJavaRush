@@ -22,19 +22,19 @@ public class Car {
         this.numberOfPassengers = numberOfPassengers;
     }
 
-    public int fill(double numberOfLiters) {
+    public int fill(double numberOfLiters) throws RuntimeException {
         if (numberOfLiters < 0)
-            return -1;
+            throw new RuntimeException();
         fuel += numberOfLiters;
         return 0;
     }
 
     public double getTripConsumption(Date date, int length, Date SummerStart, Date SummerEnd) {
         double consumption;
-        if (date.before(SummerStart) || date.after(SummerEnd)) {
-            consumption = length * winterFuelConsumption + winterWarmingUp;
+        if (!isSummer(date,SummerStart,SummerEnd)) {
+            consumption = getWinterConsumption(length);
         } else {
-            consumption = length * summerFuelConsumption;
+            consumption = getSummerConsumption(length);
         }
         return consumption;
     }
@@ -89,5 +89,18 @@ public class Car {
             result = new Cabriolet(numberOfPassengers);
         }
         return result;
+    }
+
+    public boolean isSummer(Date date, Date summerStart, Date summerEnd){
+
+        return (date.before(summerStart) || date.after(summerEnd)) ? false : true;
+    }
+
+    public double getWinterConsumption(int length){
+        return length * winterFuelConsumption + winterWarmingUp;
+    }
+
+    public double getSummerConsumption(int length){
+        return length * summerFuelConsumption;
     }
 }
