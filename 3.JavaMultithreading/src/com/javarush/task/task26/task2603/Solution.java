@@ -21,8 +21,11 @@ public class Solution {
 
         @Override
         public int compare(T o1, T o2) {
-            return Arrays.stream(comparators)
-                    .reduce((o11, o21) -> 0,Comparator::thenComparing).compare(o1, o2);
+            Comparator<T> acc = (o11, o21) -> 0;
+            for (Comparator<T> comparator : comparators) {
+                acc = acc.thenComparing(comparator);
+            }
+            return acc.compare(o1, o2);
             /*int result = 0;
             for (Comparator t: comparators) {
                 result = t.compare(o1, o2);
