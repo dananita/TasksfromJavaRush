@@ -82,5 +82,19 @@ public class Server {
                 }
             }
         }
+
+        /**
+         *
+         * @param connection - соединение с участником, которому будет слать информацию
+         * @param userName - имя участника, которому послали информацию
+         */
+        private void sendListOfUsers(Connection connection, String userName) throws IOException{
+            for (Map.Entry<String, Connection> pairConnection: connectionMap.entrySet()) {
+                if(!connection.equals(pairConnection) && !userName.equals(pairConnection.getKey())) {
+                    connection.send(new Message(MessageType.USER_ADDED, pairConnection.getKey()));
+                }
+
+            }
+        }
     }
 }
