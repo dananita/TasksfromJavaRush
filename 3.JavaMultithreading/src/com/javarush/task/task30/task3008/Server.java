@@ -96,5 +96,22 @@ public class Server {
 
             }
         }
+
+        /**
+         *
+         * @param connection - соединение с участником, которому будет слать информацию
+         * @param userName - имя участника, которому послали информацию
+         */
+        private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException{
+            while(true){
+                Message receiveMessage = connection.receive();
+                if (receiveMessage.getType() == MessageType.TEXT){
+                    sendBroadcastMessage(new Message(MessageType.TEXT,userName + ": " + receiveMessage.getData()));
+                } else {
+                    ConsoleHelper.writeMessage("Error!");
+                }
+            }
+
+        }
     }
 }
