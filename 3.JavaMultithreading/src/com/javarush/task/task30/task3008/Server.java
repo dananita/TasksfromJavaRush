@@ -23,7 +23,6 @@ public class Server {
      * @param message
      */
     public static void sendBroadcastMessage(Message message){
-
         Iterator<String> ite = connectionMap.keySet().iterator();
         while(ite.hasNext()){
             String key = ite.next();
@@ -65,6 +64,23 @@ public class Server {
 
         public Handler(Socket socket) {
             this.socket = socket;
+        }
+
+        private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException{
+            Message nameClient = null;
+            while(true) {
+                connection.send(new Message(MessageType.NAME_REQUEST));
+                nameClient = connection.receive();
+                if (nameClient.getType() == MessageType.USER_NAME
+                        && !nameClient.getData().isEmpty()
+                        && !nameClient.getData().equals("")) {
+                    if(!connectionMap.containsKey(nameClient.getData())) {
+                        connectionMap.put(nameClient.getData(), connection);
+                        connection.send(new Message(MessageType.NAME_ACCEPTED));
+                        return nameClient.getData();
+                    }
+                }
+            }
         }
     }
 }
