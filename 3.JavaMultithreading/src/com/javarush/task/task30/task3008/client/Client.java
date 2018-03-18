@@ -14,6 +14,39 @@ public class Client {
     protected Connection connection;
     private volatile boolean clientConnected = false;
 
+    public static void main(String[] args) {
+        new Client().run();
+    }
+
+    public void run(){
+            SocketThread socketThread = getSocketThread();
+            socketThread.setDaemon(true);
+            socketThread.start();
+            try {
+                synchronized (this){
+                    this.wait();
+                }
+
+            } catch (InterruptedException e) {
+                ConsoleHelper.writeMessage("Error");
+                System.exit(1);
+            }
+
+            if (clientConnected){
+                ConsoleHelper.writeMessage("Соединение установлено. Для выхода наберите команду 'exit'.");
+            } else {
+                ConsoleHelper.writeMessage("Произошла ошибка во время работы клиента.");
+            }
+            while (clientConnected){
+                    String s  = ConsoleHelper.readString();
+                    if (!s.equalsIgnoreCase("exit")){
+                        if (shouldSendTextFromConsole()){
+                            sendTextMessage(s);
+                        }
+                    } else break;
+            }
+    }
+
     /**
      * должен запросить ввод адреса сервера у пользователя и вернуть введенное значение.
      * Адрес может быть строкой, содержащей ip, если клиент и сервер
@@ -32,6 +65,7 @@ public class Client {
      */
     protected int getServerPort(){
         int result = 0;
+        ConsoleHelper.writeMessage("Port: ");
         while (true){
             result = ConsoleHelper.readInt();
             break;
@@ -40,6 +74,7 @@ public class Client {
     }
 
     protected String getUserName(){
+        ConsoleHelper.writeMessage("Client Name: ");
         return ConsoleHelper.readString();
     }
 
@@ -64,12 +99,11 @@ public class Client {
             Message message = new Message(MessageType.TEXT, text);
             connection.send(message);
         } catch (IOException e) {
-            ConsoleHelper.writeMessage("Connection is false");
+            ConsoleHelper.writeMessage("Connection aborted");
             clientConnected = false;
         }
     }
 
     public class SocketThread extends Thread{
-
     }
 }
