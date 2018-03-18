@@ -4,7 +4,9 @@ import com.javarush.task.task30.task3008.Connection;
 import com.javarush.task.task30.task3008.ConsoleHelper;
 import com.javarush.task.task30.task3008.Message;
 import com.javarush.task.task30.task3008.MessageType;
+
 import java.io.IOException;
+import java.net.Socket;
 
 /**
  * @author Daria Zhuravel
@@ -181,6 +183,20 @@ public class Client {
                 } catch (ClassNotFoundException e){
                     throw new IOException("Unexpected MessageType");
                 }
+            }
+        }
+
+        @Override
+        public void run() {
+            try {
+                Socket socket = new Socket(getServerAddress(), getServerPort());
+                connection = new Connection(socket);
+                clientHandshake();
+                clientMainLoop();
+            } catch (ClassNotFoundException e) {
+                notifyConnectionStatusChanged(false);
+            } catch (IOException e1) {
+                notifyConnectionStatusChanged(false);
             }
         }
     }
