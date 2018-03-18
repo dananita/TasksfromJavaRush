@@ -105,5 +105,47 @@ public class Client {
     }
 
     public class SocketThread extends Thread{
+        /**
+         * должен выводить текст message в консоль.
+         * @param message
+         */
+        protected void processIncomingMessage(String message){
+            ConsoleHelper.writeMessage(message);
+        }
+
+        /**
+         * должен выводить в консоль информацию о том,
+         * что участник с именем userName присоединился к чату
+         * @param userName
+         */
+        protected void informAboutAddingNewUser(String userName){
+            ConsoleHelper.writeMessage(userName + "joined the chat");
+        }
+
+        /**
+         * должен выводить в консоль, что участник с именем userName покинул чат
+         * @param userName
+         */
+        protected void informAboutDeletingNewUser(String userName){
+            ConsoleHelper.writeMessage(userName + " left the chat");
+        }
+
+        /**
+         * этот метод должен:
+         *         а) Устанавливать значение поля clientConnected
+         *         внешнего объекта Client в соответствии с переданным параметром.
+         *         б) Оповещать (пробуждать ожидающий) основной поток класса Client.
+         *
+         *         Подсказка: используй синхронизацию на уровне текущего объекта
+         *         внешнего класса и метод notify. Для класса SocketThread внешним классом
+         *         является класс Client.
+         * @param clientConnected
+         */
+        protected void notifyConnectionStatusChanged(boolean clientConnected){
+            synchronized (Client.this){
+                Client.this.clientConnected = clientConnected;
+                Client.this.notify();
+            }
+        }
     }
 }
