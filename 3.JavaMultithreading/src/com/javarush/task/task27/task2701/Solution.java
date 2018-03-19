@@ -21,15 +21,18 @@ public class Solution {
     }
 
     static boolean isSubstringPresent(String substring, String string) {
-        boolean found = false;
         int max = string.length() - substring.length();
-        label:
+        boolean found = false;
         for (int i = 0; i <= max; i++) {
             int length = substring.length();
             int j = i;
             int k = 0;
+            int count = 0;
             while (length-- != 0) {
                 if (string.charAt(j++) == substring.charAt(k++)) {
+                   count++;
+                }
+                if (count == substring.length()){
                     found = true;
                 }
             }
