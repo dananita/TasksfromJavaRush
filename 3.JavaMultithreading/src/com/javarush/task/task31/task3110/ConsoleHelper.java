@@ -4,26 +4,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * @author Daria Zhuravel
- * @date 22.03.18
- **/
 public class ConsoleHelper {
-    public static void writeMessage(String message){
+    private static BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
+
+    public static void writeMessage(String message) {
         System.out.println(message);
     }
 
-    public static String readString(){
-        String text = "";
-        try {
-            text = new BufferedReader(new InputStreamReader(System.in)).readLine();
-        } catch (IOException e) {
-            System.out.println("Произошла ошибка при вводе переменной");
-        }
+    public static String readString() throws IOException {
+        String text = bis.readLine();
         return text;
     }
 
-    public static int readInt(){
-        return Integer.parseInt(readString());
+    public static int readInt() throws IOException {
+        String text = readString();
+        return Integer.parseInt(text.trim());
     }
 }
