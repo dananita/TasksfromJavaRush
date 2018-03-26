@@ -1,68 +1,37 @@
 package com.javarush.task.task31.task3110;
 
-import com.javarush.task.task31.task3110.command.Command;
-import com.javarush.task.task31.task3110.command.ExitCommand;
+import com.javarush.task.task31.task3110.exception.WrongZipFileException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-/**
- * @author Daria Zhuravel
- * @date 22.03.18
- **/
 public class Archiver {
-    public static void main(String[] args) {
-        /*BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            Path fileArchive = Paths.get(reader.readLine());
-            Path fileThatIsArchived = Paths.get(reader.readLine());
-            ZipFileManager zipFileManager = new ZipFileManager(fileArchive);
-            zipFileManager.createZip(fileThatIsArchived);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        ExitCommand exitCommand = new ExitCommand();
-        try {
-            exitCommand.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-        Operation operation;
-        while (true){
+    public static void main(String[] args) throws IOException {
+
+        Operation operation = null;
+        do {
             try {
                 operation = askOperation();
                 CommandExecutor.execute(operation);
-                if (operation.equals(Operation.EXIT)) break;
+            } catch (WrongZipFileException e) {
+                ConsoleHelper.writeMessage("Вы не выбрали файл архива или выбрали неверный файл.");
             } catch (Exception e) {
-                e.printStackTrace();
+                ConsoleHelper.writeMessage("Произошла ошибка. Проверьте введенные данные.");
             }
-        }
 
+        } while (operation != Operation.EXIT);
     }
 
-    public static Operation askOperation() throws Exception{
+
+    public static Operation askOperation() throws IOException {
+        ConsoleHelper.writeMessage("");
         ConsoleHelper.writeMessage("Выберите операцию:");
-        ConsoleHelper.writeMessage("0 - упаковать файлы в архив");
-        ConsoleHelper.writeMessage("1 - добавить файл в архив");
-        ConsoleHelper.writeMessage("2 - удалить файл из архива");
-        ConsoleHelper.writeMessage("3 - распаковать архив");
-        ConsoleHelper.writeMessage("4 - просмотреть содержимое архива");
-        ConsoleHelper.writeMessage("5 - выход");
-        int consoleNumber = ConsoleHelper.readInt();
-        Operation result = null;
-        switch (consoleNumber){
-            case 0: {result = Operation.CREATE; break;}
-            case 1: {result = Operation.ADD; break;}
-            case 2: {result = Operation.REMOVE; break;}
-            case 3: {result = Operation.EXTRACT; break;}
-            case 4: {result = Operation.CONTENT; break;}
-            case 5: {result = Operation.EXIT; break;}
-        }
-        return result;
+        ConsoleHelper.writeMessage(String.format("\t %d - упаковать файлы в архив", Operation.CREATE.ordinal()));
+        ConsoleHelper.writeMessage(String.format("\t %d - добавить файл в архив", Operation.ADD.ordinal()));
+        ConsoleHelper.writeMessage(String.format("\t %d - удалить файл из архива", Operation.REMOVE.ordinal()));
+        ConsoleHelper.writeMessage(String.format("\t %d - распаковать архив", Operation.EXTRACT.ordinal()));
+        ConsoleHelper.writeMessage(String.format("\t %d - просмотреть содержимое архива", Operation.CONTENT.ordinal()));
+        ConsoleHelper.writeMessage(String.format("\t %d - выход", Operation.EXIT.ordinal()));
+
+        return Operation.values()[ConsoleHelper.readInt()];
     }
 }
