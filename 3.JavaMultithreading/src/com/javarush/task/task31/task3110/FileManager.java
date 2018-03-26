@@ -7,19 +7,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Daria Zhuravel
- * @date 22.03.18
- **/
 public class FileManager {
     private Path rootPath;
     private List<Path> fileList;
 
     public FileManager(Path rootPath) throws IOException {
         this.rootPath = rootPath;
-        fileList = new ArrayList<>();
+        this.fileList = new ArrayList<>();
         collectFileList(rootPath);
-
     }
 
     public List<Path> getFileList() {
@@ -27,20 +22,21 @@ public class FileManager {
     }
 
     private void collectFileList(Path path) throws IOException {
-        // если файл, то добавляем в список
+        // Добавляем только файлы
         if (Files.isRegularFile(path)) {
             Path relativePath = rootPath.relativize(path);
             fileList.add(relativePath);
         }
 
-        // если директория, то проходим по директории и
-        // добавляем все файлы в диретории в список
-        if (Files.isDirectory(path)){
-         try(DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path)){
-             for (Path entry: directoryStream) {
-                 collectFileList(entry);
-             }
-         }
+        // Добавляем содержимое директории
+        if (Files.isDirectory(path)) {
+            // Рекурсивно проходимся по всему содержмому директории
+            // Чтобы не писать код по вызову close для DirectoryStream, обернем вызов newDirectoryStream в try-with-resources
+            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path)) {
+                for (Path file : directoryStream) {
+                    collectFileList(file);
+                }
+            }
         }
     }
 }
