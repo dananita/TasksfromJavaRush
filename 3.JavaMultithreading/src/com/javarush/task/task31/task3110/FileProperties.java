@@ -1,15 +1,10 @@
 package com.javarush.task.task31.task3110;
 
-/**
- * @author Daria Zhuravel
- * @date 26.03.18
- **/
 public class FileProperties {
     private String name;
     private long size;
     private long compressedSize;
     private int compressionMethod;
-
 
     public FileProperties(String name, long size, long compressedSize, int compressionMethod) {
         this.name = name;
@@ -18,12 +13,9 @@ public class FileProperties {
         this.compressionMethod = compressionMethod;
     }
 
+
     public String getName() {
         return name;
-    }
-
-    public int getCompressionMethod() {
-        return compressionMethod;
     }
 
     public long getSize() {
@@ -34,16 +26,30 @@ public class FileProperties {
         return compressedSize;
     }
 
-    public long getCompressionRatio(){
-        return (long) 100 - ((compressedSize * 100) / size);
+    public int getCompressionMethod() {
+        return compressionMethod;
+    }
+
+    public long getCompressionRatio() {
+        // Вычисляем степень сжатия
+        return 100 - ((compressedSize * 100) / size);
     }
 
     @Override
     public String toString() {
-        String result = name;
-        if (size > 0){
-            result = String.format("%s %d Kb(%d Kb) сжатие: %d%%", name, size / 1024, compressedSize / 1024, getCompressionRatio());
+        // Строим красивую строку из свойств
+        StringBuilder builder = new StringBuilder();
+        builder.append(name);
+        if (size > 0) {
+            builder.append("\t");
+            builder.append(size / 1024);
+            builder.append(" Kb (");
+            builder.append(compressedSize / 1024);
+            builder.append(" Kb) сжатие: ");
+            builder.append(getCompressionRatio());
+            builder.append("%");
         }
-        return result;
+
+        return builder.toString();
     }
 }
