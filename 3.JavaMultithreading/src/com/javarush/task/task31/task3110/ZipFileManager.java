@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -97,6 +98,37 @@ public class ZipFileManager {
         int len;
         while ((len = in.read(buffer)) > 0) {
             out.write(buffer, 0, len);
+        }
+    }
+
+
+    /**
+     *
+     * @param outputFolder это путь, куда распаковывается архив
+     * @throws Exception
+     */
+    public void extractAll(Path outputFolder) throws Exception {
+        if (!Files.isRegularFile(zipFile)) {
+            throw new WrongZipFileException();
+        }
+
+        if (Files.notExists(outputFolder)) {
+            Files.createDirectories(outputFolder);
+        }
+
+        try (ZipInputStream zis = new ZipInputStream(Files.newInputStream(zipFile))) {
+            ZipEntry zipEntry;
+            while ((zipEntry = zis.getNextEntry()) != null) {
+                Path zipPath = outputFolder.resolve(zipEntry.getName());
+                if (zipEntry.isDirectory()) {
+                    if (Files.notExists(zipPath)) Files.createDirectories(zipPath);
+                } else {
+                    if (Files.notExists(zipPath.getParent())) Files.createDirectories(zipPath.getParent());
+                    try (OutputStream fos = Files.newOutputStream(zipPath)){
+                        copyData(zis, fos);
+                    }
+                }
+            }
         }
     }
 }
