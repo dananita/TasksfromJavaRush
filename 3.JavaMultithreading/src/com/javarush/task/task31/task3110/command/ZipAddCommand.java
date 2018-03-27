@@ -7,11 +7,7 @@ import com.javarush.task.task31.task3110.exception.PathIsNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * @author Daria Zhuravel
- * @date 22.03.18
- **/
-public class ZipAddCommand extends ZipCommand{
+public class ZipAddCommand extends ZipCommand {
     @Override
     public void execute() throws Exception {
         try {
