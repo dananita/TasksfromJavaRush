@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.file.Files;
 
 /**
  * @author Daria Zhuravel
@@ -23,7 +24,7 @@ public class Controller {
     }
 
     public void init(){
-
+        createNewDocument();
     }
 
     public static void main(String[] args) {
@@ -72,6 +73,11 @@ public class Controller {
     }
 
     public void createNewDocument() {
+        view.selectHtmlTab();
+        resetDocument();
+        view.setTitle("HTML редактор");
+        view.resetUndo();
+        currentFile = null;
     }
 
     public void openDocument() {
