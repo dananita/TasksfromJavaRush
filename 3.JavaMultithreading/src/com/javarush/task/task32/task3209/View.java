@@ -85,7 +85,32 @@ public class View extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        String commandString = e.getActionCommand();
+        switch (commandString){
+            case "Новый": {
+                controller.createNewDocument();
+                break;
+            }
+            case "Открыть": {
+                controller.openDocument();
+                break;
+            }
+            case "Сохранить": {
+                controller.saveDocument();
+                break;
+            }
+            case "Сохранить как...":{
+                controller.saveDocumentAs();
+                break;
+            }
+            case "Выход":{
+                controller.exit();
+                break;
+            }
+            case "О программе":{
+                this.showAbout();
+            }
+        }
     }
 
     /**
@@ -152,6 +177,6 @@ public class View extends JFrame implements ActionListener {
     }
 
     public void showAbout(){
-        JOptionPane.showMessageDialog(getContentPane(),"I don't know","About program",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(getContentPane(),"This is a new great program like as a hard program which is called HelloWorld","About program",JOptionPane.INFORMATION_MESSAGE);
     }
 }
