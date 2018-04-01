@@ -31,4 +31,8 @@ public class Controller {
     public void exit(){
         System.exit(0);
     }
+
+    public HTMLDocument getDocument() {
+        return document;
+    }
 }
