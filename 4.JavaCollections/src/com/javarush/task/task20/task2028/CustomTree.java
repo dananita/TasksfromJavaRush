@@ -36,7 +36,6 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
         boolean isAvailableToAddChildren() {
             return availableToAddLeftChildren | availableToAddRightChildren;
         }
-
     } // End of Entry class
 
 
@@ -45,12 +44,8 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
         for (int i = 1; i < 16; i++) {
             list.add(String.valueOf(i));
         }
-
-        //System.out.println("Expected 3, actual is " + ((CustomTree) list).getParent("8"));
         list.remove("5");
-        //System.out.println("Expected null, actual is " + ((CustomTree) list).getParent("11"));
     }
-
 
     @Override
     public boolean add(String s) {
@@ -93,8 +88,6 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
 
     @Override
     public void add(int index, String s) {
-
-
         throw new UnsupportedOperationException();
     }
 
@@ -139,25 +132,34 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
 
     @Override
     public boolean remove(Object o) {
-        String s = (String) o;
-        Queue<Entry<String>> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            Entry<String> currentNode = queue.poll();
-            if (currentNode.leftChild != null) {
-                if (currentNode.leftChild.elementName.equals(s)) {
-                    currentNode.leftChild = null;
-                    return true;
+        //Это надо делать когда очередь окажется пустой
+        // и ни одного подходящего элемента, к которому
+        // надо добавить новый элемент мы не нашли (он будет = null).
+        // Еще раз обходим дерево и вызываем правильный метод из Entry.
+        try {
+            String s = (String) o;
+            Queue<Entry<String>> queue = new LinkedList<>();
+            queue.add(root);
+            while (!queue.isEmpty()) {
+                Entry<String> currentNode = queue.poll();
+                if (currentNode.leftChild != null) {
+                    if (currentNode.leftChild.elementName.equals(s)) {
+                        currentNode.leftChild = null;
+                        return true;
+                    }
+                    queue.offer(currentNode.leftChild);
                 }
-                queue.offer(currentNode.leftChild);
-            }
-            if (currentNode.rightChild != null) {
-                if (currentNode.rightChild.elementName.equals(s)) {
-                    currentNode.rightChild = null;
-                    return true;
+                if (currentNode.rightChild != null) {
+                    if (currentNode.rightChild.elementName.equals(s)) {
+                        currentNode.rightChild = null;
+                        return true;
+                    }
+                    queue.offer(currentNode.rightChild);
                 }
-                queue.offer(currentNode.rightChild);
             }
+
+        } catch (Exception e){
+            throw new UnsupportedOperationException();
         }
         return false;
     }
@@ -165,7 +167,6 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
     public String getParent(String s) {
         String parentName = null;
         if (root != null || s != null || !s.equals(root.elementName)) {
-            Entry<String> rootElement = new Entry<>(s);
             Queue<Entry<String>> queue = new LinkedList<>();
             queue.offer(root);
 
