@@ -23,10 +23,18 @@ public class Order {
     public String toString() {
         if (dishes.isEmpty())
             return "";
-        return String.format("Your order: %s of %s",dishes.toString(),tablet.toString());
+        return String.format("Your order: %s of %s, cooking time %d" + "min", dishes.toString(), tablet.toString(), getTotalCookingTime());
     }
 
     public boolean isEmpty(){
         return dishes.isEmpty();
+    }
+
+    public int getTotalCookingTime(){ //время приготовления еды
+        int timeAllOrder = 0;
+        for (Dish d: dishes) {
+            timeAllOrder += d.getDuration();
+        }
+        return timeAllOrder;
     }
 }
