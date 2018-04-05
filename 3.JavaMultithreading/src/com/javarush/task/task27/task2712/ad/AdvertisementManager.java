@@ -5,4 +5,5 @@ package com.javarush.task.task27.task2712.ad;
  * @date 05.04.18
  **/
 public class AdvertisementManager {
+    private final AdvertisementStorage storage = AdvertisementStorage.getInstance();
 }
