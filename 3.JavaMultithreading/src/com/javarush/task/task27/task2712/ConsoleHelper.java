@@ -19,17 +19,11 @@ public class ConsoleHelper {
         System.out.println(message);
     }
 
-    public static String readString(){
-        String result = "";
-        try {
-            result = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+    public static String readString() throws IOException {
+        return bufferedReader.readLine();
     }
 
-    public static List<Dish> getAllDishesForOrder(){
+    public static List<Dish> getAllDishesForOrder() throws IOException {
         List<Dish> dishes = new ArrayList<>();
         String customerDishNumber = "";
         ConsoleHelper.writeMessage("Введите номера блюд или exit для завершения ввода");

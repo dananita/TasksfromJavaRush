@@ -1,6 +1,6 @@
 package com.javarush.task.task27.task2712;
 
-import java.io.IOException;
+import com.javarush.task.task27.task2712.kitchen.Cook;
 
 /**
  * @author Daria Zhuravel
@@ -10,5 +10,7 @@ public class Restaurant {
     public static void main(String[] args){
         Tablet tablet = new Tablet(5);
         tablet.createOrder();
+        Cook cook = new Cook("Misha");
+        tablet.addObserver(cook);
     }
 }

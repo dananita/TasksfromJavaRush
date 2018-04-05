@@ -14,7 +14,7 @@ public class Order {
     private final Tablet tablet;
     protected List<Dish> dishes;
 
-    public Order(Tablet tablet){
+    public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
         dishes = ConsoleHelper.getAllDishesForOrder();
     }
