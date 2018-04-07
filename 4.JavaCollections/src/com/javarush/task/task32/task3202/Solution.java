@@ -16,7 +16,12 @@ public class Solution {
 
     public static StringWriter getAllDataFromInputStream(InputStream is) throws IOException {
         StringWriter stringWriter = new StringWriter();
-        stringWriter.write(String.valueOf(is.read()));
+        if (is != null) {
+            int oneBytes;
+            while((oneBytes = is.read())!= -1) {
+                stringWriter.write((char)oneBytes);
+            }
+        }
         return stringWriter;
     }
 }
